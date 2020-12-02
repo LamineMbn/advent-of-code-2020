@@ -3,11 +3,11 @@ package me.advent.of.code.problems.day1
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
 
-internal class Day1Test {
+internal class ReportFixerTest {
 
     private val inputExample = listOf(1721, 979, 366, 299, 675, 1456)
     
-    private val sut = Day1()
+    private val sut = ReportFixer()
 
     @Test
     internal fun `We should have a result of 514579 for the input example when the sum of two values give us 2020`() {

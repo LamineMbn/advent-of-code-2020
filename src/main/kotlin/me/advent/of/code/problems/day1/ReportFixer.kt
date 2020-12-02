@@ -5,7 +5,7 @@ import me.advent.of.code.reader.readFile
 fun main(){
     val expenseReport = readFile("src/main/resources/inputs/day1/input_AoC.txt").map { it.toInt() }
     
-    val expenseReportFixer = Day1()
+    val expenseReportFixer = ReportFixer()
     
     val productForTwoEntries = expenseReportFixer.fixReport(expenseReport)
     val productForThreeEntries = expenseReportFixer.fixReport(expenseReport, 3)
@@ -14,7 +14,7 @@ fun main(){
     println("The correct answer is $productForThreeEntries for 3 entries")
 }
 
-class Day1 {
+class ReportFixer {
     fun fixReport(inputExample: List<Int>, numberOfEntries: Int = 2): Int {
         
         var product = 0
