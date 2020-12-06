@@ -1,6 +1,7 @@
 package me.advent.of.code.problems.day4
 
 import me.advent.of.code.reader.readFile
+import me.advent.of.code.reader.separateInputData
 
 fun main() {
     val input = readFile("src/main/resources/inputs/day4/input_AoC.txt")
@@ -20,7 +21,7 @@ class PassportValidator(private val input: List<String>) {
     }
 
     fun countValidPassports(): Int {
-        return cleanInputData(input).count { isPassportValid(it) }
+        return separateInputData(input).count { isPassportValid(it) }
     }
 
     fun isPassportValid(passportInfo: String): Boolean {
@@ -37,8 +38,6 @@ class PassportValidator(private val input: List<String>) {
 
         return passportIsValid
     }
-
-    private fun cleanInputData(input: List<String>) = input.joinToString(" ").split("  ")
 
     private fun convertToPassport(passportInfo: String): Map<String, String> {
         return passportInfo.split(" ").map { it.split(":") }.map { it[0] to it[1] }.toMap()

@@ -11,6 +11,8 @@ fun readFile(fileName: String) : List<String> {
     return lineList.toList()
 }
 
+fun separateInputData(input: List<String>) = input.joinToString(" ").split("  ")
+
 fun readFileLineByLine(fileName: String) : List<String> {
     val bufferedReader = File(fileName).bufferedReader()
     val lineList = mutableListOf<String>()

@@ -3,7 +3,7 @@ package me.advent.of.code.problems.day5
 import me.advent.of.code.reader.readFile
 
 
-fun main(){
+fun main() {
     val input = readFile("src/main/resources/inputs/day5/input_AoC.txt")
     val boardingPassScanner = BoardingPassScanner()
 
@@ -12,13 +12,13 @@ fun main(){
 
     println("$highestSeat is the highest seat number")
     println("My seat is the $mySeat seat")
-    
-    
+
+
 }
 
 
 class BoardingPassScanner {
-    
+
     companion object {
         private const val ROWS_NUMBER = 128
         private const val COLUMNS_NUMBER = 8
@@ -34,10 +34,6 @@ class BoardingPassScanner {
         return seatRange.first { it !in orderedSeatList }
     }
 
-    fun retrieveAllSeatId(input: List<String>): List<Int> {
-        return input.map { retrieveSeatId(it) }.sorted()
-    }
-
     fun retrieveSeatId(boardingPass: String): Int {
         val rowsRegionDesignation = retrieveRowsRegionsDesignation(boardingPass)
         val columnsRegionDesignation = retrieveColumnsRegionsDesignation(boardingPass)
@@ -47,6 +43,26 @@ class BoardingPassScanner {
         val column = retrieveColumn(columnsRegionDesignation)
 
         return (row.first * 8) + column.first
+    }
+
+    fun retrieveRowsRegionsDesignation(boardingPass: String): String {
+        return boardingPass.take(7)
+    }
+
+    fun retrieveColumnsRegionsDesignation(boardingPass: String): String {
+        return boardingPass.takeLast(3)
+    }
+
+    fun retrieveLowerHalfRange(rows: IntRange): IntRange {
+        return rows.lowerHalf()
+    }
+
+    fun retrieveUpperHalfRange(rows: IntRange): IntRange {
+        return rows.upperHalf()
+    }
+
+    private fun retrieveAllSeatId(input: List<String>): List<Int> {
+        return input.map { retrieveSeatId(it) }.sorted()
     }
 
     private fun retrieveRow(rowsRegionDesignation: String): IntRange {
@@ -65,27 +81,11 @@ class BoardingPassScanner {
         return columns
     }
 
-    fun retrieveRowsRegionsDesignation(boardingPass : String): String {
-        return boardingPass.take(7)
-    }
-
-    fun retrieveColumnsRegionsDesignation(boardingPass : String): String {
-        return boardingPass.takeLast(3)
-    }
-    
-    fun retrieveLowerHalfRange(rows: IntRange): IntRange {
-        return rows.lowerHalf()
-    }
-
-    fun retrieveUpperHalfRange(rows: IntRange): IntRange {
-        return rows.upperHalf()
-    }
-
 
 }
 
 enum class SeatDesignationEnum(val code: String) {
-    
+
     FRONT("F") {
         override fun chunkRange(range: IntRange): IntRange {
             return range.lowerHalf()
@@ -116,17 +116,17 @@ enum class SeatDesignationEnum(val code: String) {
         private val map = values().associateBy(SeatDesignationEnum::code)
         fun fromCode(code: String): SeatDesignationEnum = map[code] ?: UNKNOWN
     }
-    
-    abstract fun chunkRange(range : IntRange): IntRange
-    
+
+    abstract fun chunkRange(range: IntRange): IntRange
+
 }
 
-private fun IntRange.lowerHalf() : IntRange {
+private fun IntRange.lowerHalf(): IntRange {
     val lowerHalf = this.chunked(this.count().div(2)).first()
     return IntRange(lowerHalf.first(), lowerHalf.last())
 }
 
-private fun IntRange.upperHalf() : IntRange {
+private fun IntRange.upperHalf(): IntRange {
     val upperHalf = this.chunked(this.count().div(2)).last()
     return IntRange(upperHalf.first(), upperHalf.last())
 }
