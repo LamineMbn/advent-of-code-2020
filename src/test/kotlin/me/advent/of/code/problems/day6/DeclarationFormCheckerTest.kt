@@ -20,8 +20,6 @@ internal class DeclarationFormCheckerTest {
     internal fun `Should count 3 yes`(question: String) {
         val affirmativeAnswers = sut.countAffirmativeResponse(question)
         
-        print(sut.input)
-        
         affirmativeAnswers shouldBe 3
     }
 
