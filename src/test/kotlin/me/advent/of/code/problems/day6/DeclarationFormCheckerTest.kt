@@ -2,10 +2,7 @@ package me.advent.of.code.problems.day6
 
 import io.kotest.matchers.collections.shouldContainExactly
 import io.kotest.matchers.shouldBe
-import io.kotest.matchers.string.shouldHaveLength
-import jdk.nashorn.internal.ir.annotations.Ignore
 import me.advent.of.code.reader.readFile
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
